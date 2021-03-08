@@ -101,20 +101,22 @@ main {
   flex: 1 0 0;
 }
 
-.tweetForm__container {
+.tweetForm__container,
+.notificationBar__container {
   border-bottom: 1px solid var(--main-border-color);
   margin-bottom: 0.5rem;
 }
 
-.tweetForm__wrapper {
+.tweetForm__wrapper,
+.notificationBar__wrapper {
   display: flex;
   flex-direction: row;
   padding: 0.5rem 1rem;
 }
 
-.tweetForm__profile {
+.tweetForm__profile,
+.notificationBar__icon {
   padding: 0.2rem;
-  flex: 0 0 0;
 }
 
 .tweetForm__profile > img {
@@ -123,7 +125,14 @@ main {
   border-radius: 100%;
 }
 
-.tweetForm__input {
+.notificationBar__icon > i {
+  font-size: 2rem;
+  padding: 0.8rem;
+  cursor: initial;
+}
+
+.tweetForm__input,
+.notificationBar__message {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -171,24 +180,28 @@ main {
   border-radius: 1rem;
 }
 
-.tweets {
+.tweets,
+.notifications {
   flex: 1 0 80vh;
   border: 1px solid var(--main-border-color);
   overflow-y: scroll;
 }
 
-.tweet {
+.tweet,
+.notification {
   display: flex;
   list-style: none;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--main-border-color);
 }
 
-.tweet:hover {
+.tweet:hover,
+.notification:hover {
   background-color: var(--shade-color);
 }
 
-.tweet__profile {
+.tweet__profile,
+.notification__sign {
   padding: 0.2rem;
 }
 
@@ -203,7 +216,8 @@ main {
   cursor: initial;
 }
 
-.tweet__content {
+.tweet__content,
+.notification__content {
   flex: 1 0 0;
 }
 
