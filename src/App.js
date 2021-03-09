@@ -7,10 +7,7 @@ const App = (props) => {
   return (
     <div className="App">
       <main>
-        <section className="sidebar">
-          put icon here
-          {/* TODO : class 이름이 far fa-comment-dots인 Font Awesome 아이콘을 넣어야 합니다. */}
-        </section>
+        {/* TODO : Sidebar React Element를 작성하세요. */}
         <section className="features">
           <div className="tweetForm__container">
             <div className="tweetForm__wrapper">
@@ -77,10 +74,23 @@ const App = (props) => {
             */}
           </ul>
         </section>
+        {/* TODO : Footer React Element를 여기에 작성하세요 */}
       </main>
-      <footer>Copyright @ 2021 Code States</footer>
     </div>
   );
 };
 
 export default App;
+
+const Sidebar = () => {
+  return (
+    <section className="sidebar">
+      put icon here
+      {/* TODO : class 이름이 far fa-comment-dots인 Font Awesome 아이콘을 넣어야 합니다. */}
+    </section>
+  )
+}
+
+const Footer = () => {
+  return <footer>Copyright @ 2021 Code States</footer>
+}
