@@ -7,19 +7,7 @@ const App = (props) => {
   return (
     <div className="App">
       <main>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <section className="sidebar">
-          <i className={'far fa-comment-dots'}></i>
-        </section>
-=======
-        {/* TODO : Sidebar React Element를 여기에 작성하세요.
-         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
->>>>>>> abfaba0... fix App.js
-=======
-        {/* TODO : Sidebar React Element를 여기에 작성하세요.
-         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
->>>>>>> master
+        <Sidebar />
         <section className="features">
           <div className="tweetForm__container">
             <div className="tweetForm__wrapper">
@@ -68,16 +56,7 @@ const App = (props) => {
             })}
           </ul>
         </section>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        {/* TODO : Footer React Element를 
-         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
->>>>>>> abfaba0... fix App.js
-=======
-        {/* TODO : Footer React Element를 
-         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
->>>>>>> master
+        <Footer />
       </main>
     </div>
   );
@@ -89,11 +68,11 @@ const Sidebar = () => {
   return (
     <section className="sidebar">
       put icon here
-      {/* TODO : class 이름이 far fa-comment-dots인 Font Awesome 아이콘을 넣어야 합니다. */}
+      <i className="far far-comment-dots"></i>
     </section>
-  )
-}
+  );
+};
 
 const Footer = () => {
-  return <footer>Copyright @ 2021 Code States</footer>
-}
+  return <footer>Copyright @ 2021 Code States</footer>;
+};
