@@ -9,6 +9,7 @@
   --main-border-color: rgb(235, 238, 240);
   --point-color: rgb(64, 0, 199);
   --point-color-tint: rgb(159, 127, 227);
+  --point-color-tint-2: rgb(235, 229, 249);
   --default-text-color: rgb(0, 0, 0);
   --sub-text-color: rgb(91, 112, 131);
   --bold-text-color: rgb(15, 20, 25);
@@ -183,7 +184,6 @@ main {
 .tweets,
 .notifications {
   flex: 1 0 80vh;
-  border: 1px solid var(--main-border-color);
   overflow-y: scroll;
 }
 
@@ -225,6 +225,10 @@ main {
   color: var(--bold-text-color);
   font-weight: 700;
   margin-left: 0.5rem;
+}
+
+.tweet__username--purple {
+  background-color: var(--point-color-tint-2);
 }
 
 .tweet__userInfo > .tweet__createdAt {

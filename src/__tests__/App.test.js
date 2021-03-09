@@ -211,6 +211,30 @@ describe('App.js Tweet', () => {
       });
     });
   });
+
+  describe('App.js conditional rendering test', () => {
+    describe('parkhacker가 작성한 트윗의 경우', () => {
+      test('username 배경색이 --point-color-tint-2가 되도록 클레스를 지정해야 합니다.', () => {
+        const { container, queryByText } = render(
+          <App dummyTweets={[...dummyTweets.slice(0, 2)]} />
+        );
+
+        expect(queryByText('kimcoding')).toHaveTextContent(
+          dummyTweets[0].username
+        );
+        expect(queryByText('parkhacker')).toHaveTextContent(
+          dummyTweets[1].username
+        );
+
+        expect(queryByText('parkhacker')).toHaveClass(
+          'tweet__username--purple'
+        );
+        expect(queryByText('parkhacker')).toHaveStyle(
+          'background-color: var(--point-color-tint-2)'
+        );
+      });
+    });
+  });
 });
 
 // 여기부터는 Advanced Challenge 테스트입니다. 주석을 해제하고, 테스트를 진행해보세요.
