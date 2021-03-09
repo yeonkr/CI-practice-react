@@ -7,7 +7,8 @@ const App = (props) => {
   return (
     <div className="App">
       <main>
-        {/* TODO : Sidebar React Element를 작성하세요. */}
+        {/* TODO : Sidebar React Element를 여기에 작성하세요.
+         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
         <section className="features">
           <div className="tweetForm__container">
             <div className="tweetForm__wrapper">
@@ -74,7 +75,8 @@ const App = (props) => {
             */}
           </ul>
         </section>
-        {/* TODO : Footer React Element를 여기에 작성하세요 */}
+        {/* TODO : Footer React Element를 
+         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
       </main>
     </div>
   );
