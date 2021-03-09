@@ -7,9 +7,14 @@ const App = (props) => {
   return (
     <div className="App">
       <main>
+<<<<<<< HEAD
         <section className="sidebar">
           <i className={'far fa-comment-dots'}></i>
         </section>
+=======
+        {/* TODO : Sidebar React Element를 여기에 작성하세요.
+         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
+>>>>>>> abfaba0... fix App.js
         <section className="features">
           <div className="tweetForm__container">
             <div className="tweetForm__wrapper">
@@ -58,6 +63,11 @@ const App = (props) => {
             })}
           </ul>
         </section>
+<<<<<<< HEAD
+=======
+        {/* TODO : Footer React Element를 
+         하단에 Siderbar React Element가 이미 선언되어 있습니다. */}
+>>>>>>> abfaba0... fix App.js
       </main>
       <footer>Copyright @ 2021 Code States</footer>
     </div>
