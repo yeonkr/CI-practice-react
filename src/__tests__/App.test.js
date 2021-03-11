@@ -1,8 +1,10 @@
-import { render } from '@testing-library/react';
 import React from 'react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { findAllInRenderedTree, isElement } from 'react-dom/test-utils';
+import TestRenderer from 'react-test-renderer';
 
-import App from '../App';
+import { App, Sidebar, Features, Footer } from '../App';
 import { dummyNotis, dummyTweets } from '../static/dummyData';
 
 describe('App.js Icon', () => {
@@ -16,43 +18,16 @@ describe('App.js Icon', () => {
   });
 });
 
-describe('App.js Form', () => {
-  describe('Form 테스트', () => {
-    test('자신의 프로필 사진이 있어야 합니다.', () => {
-      const { container } = render(<App dummyTweets={[]} />);
-      const tweet = container.querySelector('.tweetForm__wrapper');
-      const img = container.querySelector(
-        '.features .tweetForm__profile > img'
-      );
+describe('App.js Components', () => {
+  test('App 컴포넌트에 Sidebar 컴포넌트, Feature 컴포넌트가 있어야 합니다.', () => {
+    const testRenderer = TestRenderer.create(<App dummyTweets={[]} />);
+    const testInstance = testRenderer.root;
 
-      expect(tweet).toContainElement(img);
-      expect(img).toBeInstanceOf(HTMLElement);
-    });
-
-    test('트윗을 작성할 수 있는 textarea가 있어야 합니다. (placeholder="Your Tweet here.")', () => {
-      const { container } = render(<App dummyTweets={[]} />);
-      const tweet = container.querySelector('.tweetForm__wrapper');
-      const textarea = container.querySelector(
-        '.features .tweetForm__inputWrapper > textarea'
-      );
-
-      expect(tweet).toContainElement(textarea);
-      expect(textarea).toBeInstanceOf(HTMLElement);
-      expect(textarea.tagName).toBe('TEXTAREA');
-      expect(textarea.placeholder).toBeTruthy();
-    });
-
-    test('트윗을 전송할 수 있는 button이 있어야 합니다.', () => {
-      const { container, queryByRole } = render(<App dummyTweets={[]} />);
-      const tweet = container.querySelector('.tweetForm__submit');
-      const button = queryByRole('button', { name: '트윗' });
-
-      expect(tweet).toContainElement(button);
-      expect(button).toBeInstanceOf(HTMLButtonElement);
-      expect(button.tagName).toBe('BUTTON');
-    });
+    expect(testInstance.findByType(Sidebar).props).toEqual({});
   });
+});
 
+describe('App.js Count', () => {
   describe('Count 기능 테스트', () => {
     test('트윗 총 갯수를 보여줄 수 있어야 합니다.', () => {
       const { container } = render(<App dummyTweets={[]} />);

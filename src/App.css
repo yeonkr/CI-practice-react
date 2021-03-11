@@ -143,6 +143,7 @@ main {
 
 .tweetForm__inputWrapper {
   display: flex;
+  justify-content: center;
   margin: 0.5rem;
   flex: 0 0 4rem;
 }

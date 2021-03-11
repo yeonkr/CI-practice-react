@@ -14,8 +14,6 @@ const App = (props) => {
   );
 };
 
-export default App;
-
 const Sidebar = () => {
   return (
     <section className="sidebar">
@@ -30,26 +28,16 @@ const Features = (props) => {
     <section className="features">
       <div className="tweetForm__container">
         <div className="tweetForm__wrapper">
-          <div className="tweetForm__profile">
-            <img src="codestates-symbol-logo-192.png"></img>
-          </div>
+          <div className="tweetForm__profile"></div>
           <div className="tweetForm__input">
             <div className="tweetForm__inputWrapper">
-              <textarea
-                className="tweetForm__textarea"
-                placeholder="Your tweet here."
-                autoFocus
-              ></textarea>
               <div className="tweetForm__count" role="status">
                 <span className="tweetForm__count__text">
                   {'total: ' + dummyTweets.length}
                 </span>
               </div>
             </div>
-            <div className="tweetForm__submit">
-              <div className="tweetForm__submitIcons"></div>
-              <button className="tweetForm__submitButton">트윗</button>
-            </div>
+            <div className="tweetForm__submit"></div>
           </div>
         </div>
       </div>
@@ -88,3 +76,6 @@ const Features = (props) => {
 const Footer = () => {
   return <footer>Copyright @ 2021 Code States</footer>;
 };
+
+// ! 아래 코드는 수정하지 않습니다.
+export { App, Sidebar, Features, Footer };
