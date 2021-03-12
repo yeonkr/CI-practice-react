@@ -9,7 +9,6 @@
   --main-border-color: rgb(235, 238, 240);
   --point-color: rgb(64, 0, 199);
   --point-color-tint: rgb(159, 127, 227);
-  --point-color-tint-2: rgb(235, 229, 249);
   --default-text-color: rgb(0, 0, 0);
   --sub-text-color: rgb(91, 112, 131);
   --bold-text-color: rgb(15, 20, 25);
@@ -95,7 +94,9 @@ main {
   cursor: pointer;
 }
 
-.features {
+.features,
+.myInfo,
+.noti__wrapper {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--main-border-color);
@@ -103,9 +104,35 @@ main {
 }
 
 .tweetForm__container,
+.myInfo__container,
 .notificationBar__container {
   border-bottom: 1px solid var(--main-border-color);
   margin-bottom: 0.5rem;
+}
+
+.myInfo__header {
+  padding-left: 15px;
+  height: 97px;
+  display: flex;
+  align-items: center;
+}
+
+.myInfo__detail {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.myInfo__detail > .myInfo__detailName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.myInfo__profile > img {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
 }
 
 .tweetForm__wrapper,
@@ -143,7 +170,6 @@ main {
 
 .tweetForm__inputWrapper {
   display: flex;
-  justify-content: center;
   margin: 0.5rem;
   flex: 0 0 4rem;
 }
@@ -185,6 +211,7 @@ main {
 .tweets,
 .notifications {
   flex: 1 0 80vh;
+  border: 1px solid var(--main-border-color);
   overflow-y: scroll;
 }
 
@@ -226,10 +253,6 @@ main {
   color: var(--bold-text-color);
   font-weight: 700;
   margin-left: 0.5rem;
-}
-
-.tweet__username--purple {
-  background-color: var(--point-color-tint-2);
 }
 
 .tweet__userInfo > .tweet__createdAt {
