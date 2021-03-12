@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { findAllInRenderedTree, isElement } from 'react-dom/test-utils';
 import TestRenderer from 'react-test-renderer';
 
 import { App, Sidebar, Features, Footer } from '../App';
@@ -19,11 +18,44 @@ describe('App.js Icon', () => {
 });
 
 describe('App.js Components', () => {
-  test('App 컴포넌트에 Sidebar 컴포넌트, Feature 컴포넌트가 있어야 합니다.', () => {
-    const testRenderer = TestRenderer.create(<App dummyTweets={[]} />);
-    const testInstance = testRenderer.root;
+  test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Features 컴포넌트가 있어야 합니다.', () => {
+    const appInstance = TestRenderer.create(<App dummyTweets={[]} />).root;
 
-    expect(testInstance.findByType(Sidebar).props).toEqual({});
+    expect(appInstance.findByType(Sidebar).type).toBe(Sidebar);
+    expect(appInstance.findByType(Features).type).toBe(Features);
+  });
+
+  test('App 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
+    const appInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
+      .root;
+    const appInstanceWithThreeTweets = TestRenderer.create(
+      <App dummyTweets={dummyTweets.slice(0, 3)} />
+    ).root;
+
+    expect(appInstance.props.dummyTweets).toBe(dummyTweets);
+    expect(appInstanceWithThreeTweets.props.dummyTweets).toEqual(
+      dummyTweets.slice(0, 3)
+    );
+  });
+
+  test('Features 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
+    const appInstance = TestRenderer.create(<App dummyTweets={[]} />).root;
+
+    expect(appInstance.findByType(Footer).type).toBe(Footer);
+  });
+
+  test('Features 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
+    const featuresInstance = TestRenderer.create(
+      <Features dummyTweets={dummyTweets} />
+    ).root;
+    const featuresInstanceWithThreeTweets = TestRenderer.create(
+      <Features dummyTweets={dummyTweets.slice(0, 3)} />
+    ).root;
+
+    expect(featuresInstance.props.dummyTweets).toBe(dummyTweets);
+    expect(featuresInstanceWithThreeTweets.props.dummyTweets).toEqual(
+      dummyTweets.slice(0, 3)
+    );
   });
 });
 
@@ -37,7 +69,7 @@ describe('App.js Count', () => {
 
     test('트윗 갯수와 카운트가 일치해야 합니다. (1)', () => {
       const { container } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+        <App dummyTweets={dummyTweets.slice(0, 1)} />
       );
       const count = container.querySelector('.tweetForm__count');
       expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b1\b).*$/im);
@@ -45,7 +77,7 @@ describe('App.js Count', () => {
 
     test('트윗 갯수와 카운트가 일치해야 합니다. (4)', () => {
       const { container } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 4)]} />
+        <App dummyTweets={dummyTweets.slice(0, 4)} />
       );
       const count = container.querySelector('.tweetForm__count');
       expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b4\b).*$/im);
@@ -57,7 +89,7 @@ describe('App.js Tweet', () => {
   describe('Tweet 테스트', () => {
     test('트윗 저자의 프로필 사진이 있어야 합니다.', () => {
       const { container } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+        <App dummyTweets={dummyTweets.slice(0, 1)} />
       );
       const tweet = container.querySelector('.tweet');
       const imgs = container.querySelectorAll('img');
@@ -71,7 +103,7 @@ describe('App.js Tweet', () => {
 
     test('유져 이름이 있어야 합니다.', () => {
       const { container, queryByText } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+        <App dummyTweets={dummyTweets.slice(0, 1)} />
       );
       const tweet = container.querySelector('.tweet');
       const username = queryByText('kimcoding');
@@ -82,7 +114,7 @@ describe('App.js Tweet', () => {
 
     test('트윗 생성 일자(yyyy. mm. dd.) 가 있어야 합니다.', () => {
       const { container, queryByText } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+        <App dummyTweets={dummyTweets.slice(0, 1)} />
       );
       const tweet = container.querySelector('.tweet');
       const createdAt = queryByText('2019. 2. 25.');
@@ -93,7 +125,7 @@ describe('App.js Tweet', () => {
 
     test('트윗 메세지가 있어야 합니다.', () => {
       const { container, queryByText } = render(
-        <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+        <App dummyTweets={dummyTweets.slice(0, 1)} />
       );
       const tweet = container.querySelector('.tweet');
       const tweetMessage = queryByText(
@@ -109,7 +141,7 @@ describe('App.js Tweet', () => {
     describe('트윗 한 개가 주어진 경우', () => {
       test('하나의 트윗이 보여야 합니다.', () => {
         const { queryByText } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+          <App dummyTweets={dummyTweets.slice(0, 1)} />
         );
 
         expect(queryByText('kimcoding')).toHaveTextContent(
@@ -120,7 +152,7 @@ describe('App.js Tweet', () => {
 
       test('카운트가 1이여야 합니다.', () => {
         const { container } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
+          <App dummyTweets={dummyTweets.slice(0, 1)} />
         );
         const count = container.querySelector('.tweetForm__count');
         expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b1\b).*$/im);
@@ -130,7 +162,7 @@ describe('App.js Tweet', () => {
     describe('트윗 세 개가 주어진 경우', () => {
       test('세 개의 트윗이 보여야 합니다.', () => {
         const { queryByText } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 3)]} />
+          <App dummyTweets={dummyTweets.slice(0, 3)} />
         );
 
         expect(queryByText('kimcoding')).toHaveTextContent(
@@ -147,7 +179,7 @@ describe('App.js Tweet', () => {
 
       test('카운트가 3이여야 합니다.', () => {
         const { container } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 3)]} />
+          <App dummyTweets={dummyTweets.slice(0, 3)} />
         );
         const count = container.querySelector('.tweetForm__count');
         expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b3\b).*$/im);
@@ -157,7 +189,7 @@ describe('App.js Tweet', () => {
     describe('트윗 다섯 개가 주어진 경우', () => {
       test('다섯 개의 트윗이 보여야 합니다.', () => {
         const { queryByText } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 5)]} />
+          <App dummyTweets={dummyTweets.slice(0, 5)} />
         );
 
         expect(queryByText('kimcoding')).toHaveTextContent(
@@ -179,7 +211,7 @@ describe('App.js Tweet', () => {
 
       test('카운트가 5이여야 합니다.', () => {
         const { container } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 5)]} />
+          <App dummyTweets={dummyTweets.slice(0, 5)} />
         );
         const count = container.querySelector('.tweetForm__count');
         expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b5\b).*$/im);
@@ -190,8 +222,8 @@ describe('App.js Tweet', () => {
   describe('App.js conditional rendering test', () => {
     describe('parkhacker가 작성한 트윗의 경우', () => {
       test('username 배경색이 --point-color-tint-2가 되도록 클레스를 지정해야 합니다.', () => {
-        const { container, queryByText } = render(
-          <App dummyTweets={[...dummyTweets.slice(0, 2)]} />
+        const { queryByText } = render(
+          <App dummyTweets={dummyTweets.slice(0, 2)} />
         );
 
         expect(queryByText('kimcoding')).toHaveTextContent(
