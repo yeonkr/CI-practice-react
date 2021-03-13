@@ -1,0 +1,23 @@
+.notification {
+  display: flex;
+  list-style: none;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.notification:hover {
+  background-color: var(--shade-color);
+}
+
+.notification__sign {
+  padding: 0.2rem;
+}
+
+.notification__sign > .fas {
+  display: initial;
+  cursor: initial;
+}
+
+.notification__content {
+  flex: 1 0 0;
+}

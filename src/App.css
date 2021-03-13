@@ -94,56 +94,25 @@ main {
   cursor: pointer;
 }
 
-.features,
-.myInfo,
-.noti__wrapper {
+.features {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--main-border-color);
   flex: 1 0 0;
 }
 
-.tweetForm__container,
-.myInfo__container,
-.notificationBar__container {
+.tweetForm__container {
   border-bottom: 1px solid var(--main-border-color);
   margin-bottom: 0.5rem;
 }
 
-.myInfo__header {
-  padding-left: 15px;
-  height: 97px;
-  display: flex;
-  align-items: center;
-}
-
-.myInfo__detail {
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.myInfo__detail > .myInfo__detailName {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.myInfo__profile > img {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-}
-
-.tweetForm__wrapper,
-.notificationBar__wrapper {
+.tweetForm__wrapper {
   display: flex;
   flex-direction: row;
   padding: 0.5rem 1rem;
 }
 
-.tweetForm__profile,
-.notificationBar__icon {
+.tweetForm__profile {
   padding: 0.2rem;
 }
 
@@ -153,14 +122,7 @@ main {
   border-radius: 100%;
 }
 
-.notificationBar__icon > i {
-  font-size: 2rem;
-  padding: 0.8rem;
-  cursor: initial;
-}
-
-.tweetForm__input,
-.notificationBar__message {
+.tweetForm__input {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -206,60 +168,4 @@ main {
   margin: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-}
-
-.tweets,
-.notifications {
-  flex: 1 0 80vh;
-  border: 1px solid var(--main-border-color);
-  overflow-y: scroll;
-}
-
-.tweet,
-.notification {
-  display: flex;
-  list-style: none;
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--main-border-color);
-}
-
-.tweet:hover,
-.notification:hover {
-  background-color: var(--shade-color);
-}
-
-.tweet__profile,
-.notification__sign {
-  padding: 0.2rem;
-}
-
-.tweet__profile > img {
-  display: inline-block;
-  width: 50px;
-  border-radius: 100%;
-}
-
-.notification__sign > .fas {
-  display: initial;
-  cursor: initial;
-}
-
-.tweet__content,
-.notification__content {
-  flex: 1 0 0;
-}
-
-.tweet__userInfo > .tweet__username {
-  color: var(--bold-text-color);
-  font-weight: 700;
-  margin-left: 0.5rem;
-}
-
-.tweet__userInfo > .tweet__createdAt {
-  color: var(--sub-text-color);
-  margin-left: 0.5rem;
-}
-
-.tweet__message {
-  padding: 0.5rem;
 }
