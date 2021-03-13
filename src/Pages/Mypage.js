@@ -11,7 +11,7 @@ const Mypage = (props) => {
   );
 
   return (
-    <section className="myInfo">
+    <section className="myInfo" data-testid="Mypage">
       <div className="myInfo__container">
         <div className="myInfo__wrapper">
           <div className="myInfo__profile">
@@ -32,3 +32,4 @@ const Mypage = (props) => {
 };
 
 export default Mypage;
+// export { Mypage, Tweets, Footer };
