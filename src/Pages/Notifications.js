@@ -5,7 +5,7 @@ import './Notifications.css';
 
 const Notifications = ({ dummyNotis }) => {
   return (
-    <section className="notificationInfo" data-testid="NotificationInfo">
+    <section className="notificationInfo">
       <div className="notificationBar__container">
         <div className="notificationBar__wrapper">
           <div className="notificationBar__icon">

@@ -11,7 +11,7 @@ const Mypage = (props) => {
   );
 
   return (
-    <section className="myInfo" data-testid="Mypage">
+    <section className="myInfo">
       <div className="myInfo__container">
         <div className="myInfo__wrapper">
           <div className="myInfo__profile">
