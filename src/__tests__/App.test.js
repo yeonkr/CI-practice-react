@@ -17,7 +17,8 @@ import { dummyNotis, dummyTweets } from '../static/dummyData';
 describe('Sidebar.js Icon', () => {
   test('Font Awesome을 이용한 알림 아이콘이 있어야 합니다.', () => {
     const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      // <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      <App dummyTweets={[]} dummyNotis={[]} />
     );
     const notificationIcon = container.querySelector('.far.fa-bell');
 
@@ -27,9 +28,7 @@ describe('Sidebar.js Icon', () => {
   });
 
   test('Font Awesome을 이용한 마이페이지 아이콘이 있어야 합니다.', () => {
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    );
+    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
     const mypageIcon = container.querySelector('.far.fa-user');
 
     expect(mypageIcon).not.toBeNull();
@@ -38,7 +37,7 @@ describe('Sidebar.js Icon', () => {
   });
 });
 
-describe('App.js Components', async () => {
+describe('App.js Components', () => {
   test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Features, Mypage, Notifications 컴포넌트가 있어야 합니다.', () => {
     const appInstance = TestRenderer.create(
       <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
@@ -86,9 +85,8 @@ describe('App.js Components', async () => {
   });
 
   test('App 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
-    const appInstance = TestRenderer.create(
-      <App dummyNotis={dummyNotis} dummyTweets={dummyTweets} />
-    ).root;
+    const appInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
+      .root;
     const appInstanceWithThreeTweets = TestRenderer.create(
       <App dummyTweets={dummyTweets.slice(0, 3)} />
     ).root;
@@ -192,177 +190,3 @@ describe('React Router', () => {
     expect(routeInstance.findByType(Route).props.path).toBe('/mypage');
   });
 });
-
-// 여기부터는 Advanced Challenge 테스트입니다. 주석을 해제하고, 테스트를 진행해보세요.
-// 필수 과제는 아닙니다.
-
-// import { access } from 'fs/promises';
-// import { join } from 'path';
-// import userEvent from '@testing-library/user-event';
-// import { runWithRealTimers } from '@testing-library/dom/dist/helpers';
-// // import jest from 'jest';
-
-// describe('Advanced Challenge', () => {
-//   test('Font Awesome을 npm으로 설치해야 합니다. (fontawesome-free or react-fontawesome)', async () => {
-//     let haveFontAwesomeFree = false;
-//     let haveReactFontAwesome = false;
-//     const defaultPath = join(process.cwd(), 'node_modules/@fortawesome');
-//     const paths = ['fontawesome-free', 'react-fontawesome'];
-
-//     try {
-//       const isDirHere = await access(join(defaultPath, paths[0]));
-//       const isCssDirHere = await access(join(defaultPath, paths[0], 'css'));
-//       haveFontAwesomeFree = true;
-//     } catch (e) {
-//       console.log(paths[0], ' not installed');
-//     }
-
-//     try {
-//       const isDirHere = await access(join(defaultPath, paths[1]));
-//       const isBabelHere = await access(
-//         join(defaultPath, paths[1], 'babel.config.js')
-//       );
-//       haveFontAwesomeFree = true;
-//     } catch (e) {
-//       console.log(paths[1], ' not installed');
-//     }
-
-//     expect(haveFontAwesomeFree || haveReactFontAwesome).toBeTruthy();
-//   });
-
-//   test('트윗 전송 기능을 구현해야 합니다. (1회 전송)', async () => {
-//     const char = String.fromCharCode(
-//       0x30a0 + Math.random() * (0x30ff - 0x30a0 + 1)
-//     );
-//     const { container, queryByRole, queryByText } = render(
-//       <App dummyTweets={[...dummyTweets.slice(0, 1)]} />
-//     );
-//     const textarea = queryByRole('textbox');
-//     const button = queryByRole('button', { name: '트윗' });
-
-//     await userEvent.type(textarea, char, { delay: 50 });
-//     userEvent.click(button);
-
-//     const tweet = queryByText(char);
-//     expect(tweet).toBeInTheDocument();
-
-//     const count = container.querySelector('.tweetForm__count');
-//     expect(count).toHaveTextContent(/^(?=.*\btotal\b)(?=.*\b2\b).*$/im);
-//   });
-
-//   describe('App.js Notification', () => {
-//     describe('App.js Notification Icon', () => {
-//       test('Font Awesome을 활용한 알림 아이콘이 있어야 합니다.', () => {
-//         const { container } = render(<App dummyTweets={[]} />);
-//         const notificationIcon = container.querySelector('.far.fa-bell');
-
-//         expect(notificationIcon).not.toBeNull();
-//         expect(notificationIcon).toBeInstanceOf(HTMLElement);
-//         expect(notificationIcon.tagName).toBe('I');
-//       });
-//     });
-
-//     describe('App.js Notifications', () => {
-//       test('알림 아이콘을 클릭하면 알림이 보여야 합니다.', () => {
-//         const { container, queryByText } = render(
-//           <App
-//             dummyTweets={[...dummyTweets.slice(0, 1)]}
-//             dummyNotis={dummyNotis}
-//           />
-//         );
-
-//         const notificationIcon = container.querySelector('.far.fa-bell');
-//         userEvent.click(notificationIcon);
-
-//         const notification = container.querySelector('.notification');
-//         const notificationMessage = queryByText(/^Elon Mask/g);
-
-//         expect(notification).toContainElement(notificationMessage);
-//         expect(notificationMessage).toHaveClass('notification__message');
-//       });
-
-//       test('알림 아이콘을 클릭하고, 트윗 아이콘을 클릭하면 다시 트윗을 보여줘야 합니다.', () => {
-//         const { container, queryByText } = render(
-//           <App
-//             dummyTweets={[...dummyTweets.slice(0, 1)]}
-//             dummyNotis={dummyNotis}
-//           />
-//         );
-
-//         const notificationIcon = container.querySelector('.far.fa-bell');
-//         userEvent.click(notificationIcon);
-
-//         const notification = container.querySelector('.notification');
-//         const notificationMessage = queryByText(/^Elon Mask/g);
-
-//         expect(notification).toContainElement(notificationMessage);
-//         expect(notificationMessage).toHaveClass('notification__message');
-
-//         const tweetIcon = container.querySelector('.far.fa-comment-dots');
-//         userEvent.click(tweetIcon);
-
-//         const tweet = container.querySelector('.tweet');
-//         const tweetMessage = queryByText(
-//           /^모든 국민은 인간으로서의 존엄과 가치를 가지며,/g
-//         );
-
-//         expect(tweet).toContainElement(tweetMessage);
-//         expect(tweetMessage).toHaveClass('tweet__message');
-//       });
-
-//       describe('notifications 데이터 렌더링 테스트', () => {
-//         describe('알림 한 개가 주어진 경우', () => {
-//           test('하나의 알림이 보여야 합니다.', () => {
-//             const { container, queryByText } = render(
-//               <App
-//                 dummyTweets={[...dummyTweets.slice(0, 1)]}
-//                 dummyNotis={dummyNotis}
-//               />
-//             );
-
-//             const notificationIcon = container.querySelector('.far.fa-bell');
-//             userEvent.click(notificationIcon);
-
-//             const notifications = container.querySelector('.notifications');
-//             const notificationMessage = queryByText(/^Elon Mask/g);
-
-//             expect(notifications).toContainElement(notificationMessage);
-//           });
-//         });
-
-//         describe('알림 세 개가 주어진 경우', () => {
-//           test('세 개의 알림이 보여야 합니다.', () => {
-//             const { container, queryByText } = render(
-//               <App
-//                 dummyTweets={[...dummyTweets.slice(0, 1)]}
-//                 dummyNotis={dummyNotis}
-//               />
-//             );
-
-//             const notificationIcon = container.querySelector('.far.fa-bell');
-//             userEvent.click(notificationIcon);
-
-//             const notifications = container.querySelector('.notifications');
-//             const notificationMessage0 = queryByText(/^Elon Mask/g);
-//             const notificationMessage1 = queryByText(/^Steve Jubs/g);
-//             const notificationMessage2 = queryByText(/^Linkun Perk/g);
-
-//             expect(notifications).toContainElement(notificationMessage0);
-//             expect(notifications).toContainElement(notificationMessage1);
-//             expect(notifications).toContainElement(notificationMessage2);
-
-//             expect(notificationMessage0).toHaveTextContent(
-//               dummyNotis[0].username
-//             );
-//             expect(notificationMessage1).toHaveTextContent(
-//               dummyNotis[1].username
-//             );
-//             expect(notificationMessage2).toHaveTextContent(
-//               dummyNotis[2].username
-//             );
-//           });
-//         });
-//       });
-//     });
-//   });
-// });

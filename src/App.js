@@ -22,8 +22,11 @@ const App = (props) => {
           <Sidebar />
 
           <Switch>
-            //TODO - Route 를 이용하여 경로를 설정하고 mypage와 notification
-            컴포넌트를 연결해주세요.
+            {/* 
+            //TODO 1 - Route 를 이용하여 경로를 설정하고 mypage와 notification 컴포넌트를 연결해주세요.
+            //TODO 2 - Mypage 컴포넌트에는 dummyTweets 가 전달되어야합니다.
+            //TODO 3 - Notifications 컴포넌트에는 dummyNotis가 전달되어야합니다.
+             */}
             <Route path="/mypage">
               <Mypage dummyTweets={dummyTweets} />
             </Route>
