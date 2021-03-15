@@ -18,15 +18,13 @@ describe('Mypage.js Components', () => {
     expect(mypageInstance.findByType(Tweets).type).toBe(Tweets);
     expect(mypageInstance.findByType(Footer).type).toBe(Footer);
   });
+});
 
-  test('Mypage 컴포넌트에 김코딩 이름이 있어야 합니다.', () => {
-    const { container, queryByText } = render(
-      <Mypage dummyTweets={dummyTweets.slice(0, 1)} />
-    );
-    const tweet = container.querySelector('.tweet');
-    const username = queryByText('kimcoding');
-
-    expect(tweet).toContainElement(username);
-    expect(username).toHaveClass('tweet__username');
+describe('Mypage 데이터 렌더링 테스트', () => {
+  describe('kimcoding이 작성한 트윗이 한 개인 경우', () => {
+    test.todo('한 개의 트윗이 보여야 합니다.');
+  });
+  describe('kimcoding이 작성한 트윗이 세 개인 경우', () => {
+    test.todo('세 개의 트윗이 보여야 합니다.');
   });
 });

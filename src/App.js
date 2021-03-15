@@ -33,7 +33,7 @@ const App = (props) => {
             <Route path="/notification">
               <Notifications dummyNotis={dummyNotis} />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Features dummyTweets={dummyTweets} />
             </Route>
           </Switch>

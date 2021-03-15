@@ -15,6 +15,8 @@ import Notifications from '../Pages/Notifications';
 import { dummyNotis, dummyTweets } from '../static/dummyData';
 
 describe('Sidebar.js Icon', () => {
+  test.todo('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.');
+
   test('Font Awesome을 이용한 알림 아이콘이 있어야 합니다.', () => {
     const { container } = render(
       // <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
@@ -55,7 +57,6 @@ describe('App.js Components', () => {
     const mypageIcon = container.querySelector('.far.fa-user');
 
     userEvent.click(mypageIcon);
-
     const mypageInstance = TestRenderer.create(
       <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
     ).root;
@@ -71,17 +72,6 @@ describe('App.js Components', () => {
     );
 
     userEvent.click(mainIcon);
-
-    //! 폴더구분 시 = route 하면, 찾지 못함 : No instances found with node type: "Mypage"
-    // expect(appInstance.findByProps({ className: 'myInfo' }).toBe('myInfo'));
-    // expect(appInstance.findByType(Route).props.children.type).toBe(Mypage);
-    // expect(appInstance.findByType(Notifications).type).toBe(Notifications);
-    // //!임시 - data-id 사용했으나 수강생 입장에서는 추가할 수 없는 속성..
-    // let { getByTestId } = render(<Mypage dummyTweets={dummyTweets} />);
-    // getByTestId('Mypage'); // Mypage 존재유무 확인
-
-    // { getByTestId } = render(<Notifications dummyNotis={dummyNotis} />);
-    // getByTestId('Notifications'); // Notifications 존재유무 확인
   });
 
   test('App 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
@@ -120,73 +110,57 @@ describe('App.js Components', () => {
 });
 
 describe('React Router', () => {
-  test('react-router 를 npm 으로 설치해야 합니다. (react-router-dom)', async () => {
+  test('react-router-dom 를 npm 으로 설치해야 합니다. (react-router-dom)', async () => {
     let haveReactRouterDom = false;
-    const defaultPath = join(process.cwd(), 'node_modules/react-router-dom');
-    const paths = ['react-router-dom'];
+    const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
-      // const isDirHere = await access(join(defaultPath, paths[0]));
-      //! Paths 가 없어도 되는지...?
       const isDirHere = await access(join(defaultPath));
       haveReactRouterDom = true;
     } catch (e) {
-      console.log(paths[0], ' not installed');
+      console.log('react-router-dom is not installed');
     }
 
-    expect(haveReactRouterDom).toBeTruthy();
+    expect(haveReactRouterDom).toBe(true);
   });
 
   test('처음 접속 시, "/" 으로 렌더링 되어야 합니다.', async () => {
-    //! Link to "/"에 "/sss" 해도 통과되는 현상이 일어남...why?
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    );
-
-    const mainIcon = container.querySelector('.far.fa-comment-dots');
-    userEvent.click(mainIcon);
-
+    const rootPath = '/';
     const routeInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      <App dummyTweets={[]} dummyNotis={[]} />
     ).root;
 
-    expect(routeInstance.findByType(Route).props.path).toBe('/');
-    //   expect(history.location.pathname).toBe('/');
+    expect(routeInstance.findByType(Route).props.path).toBe(rootPath);
+    expect(location.pathname).toBe(rootPath);
   });
 
   test('알림 메뉴를 누르면 /notification 으로 렌더링되어야 합니다.', async () => {
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    );
+    const notificationPath = '/notification';
+    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
 
     const notificationIcon = container.querySelector('.far.fa-bell');
     userEvent.click(notificationIcon);
 
-    const currentPage = container.querySelector('.notificationInfo');
-    // console.log('현페이지', currentPage);
-
     const routeInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      <App dummyTweets={[]} dummyNotis={[]} />
     ).root;
 
-    expect(routeInstance.findByType(Route).props.path).toBe('/notification');
+    expect(routeInstance.findByType(Route).props.path).toBe(notificationPath);
+    expect(location.pathname).toBe(notificationPath);
   });
 
   test('마이페이지 메뉴를 누르면 /mypage 로 렌더링 되어야 합니다.', async () => {
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    );
+    const myPagePath = '/mypage';
+    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
 
     const mypageIcon = container.querySelector('.far.fa-user');
     userEvent.click(mypageIcon);
 
-    const currentPage = container.querySelector('.myInfo');
-    // console.log('현페이지', currentPage);
-
     const routeInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      <App dummyTweets={[]} dummyNotis={[]} />
     ).root;
 
-    expect(routeInstance.findByType(Route).props.path).toBe('/mypage');
+    expect(routeInstance.findByType(Route).props.path).toBe(myPagePath);
+    expect(location.pathname).toBe(myPagePath);
   });
 });
