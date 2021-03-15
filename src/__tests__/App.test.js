@@ -9,19 +9,24 @@ import { join } from 'path';
 //! router test
 import { Route } from 'react-router-dom';
 
-import { App, Sidebar, Features, Footer } from '../App';
+import { App, Sidebar, Footer } from '../App';
+import Tweets from '../Pages/Tweets';
 import Mypage from '../Pages/Mypage';
 import Notifications from '../Pages/Notifications';
 import { dummyNotis, dummyTweets } from '../static/dummyData';
 
 describe('Sidebar.js Icon', () => {
-  test.todo('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.');
+  test('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.', () => {
+    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
+    const commentIcon = container.querySelector('.far.fa-comment-dots');
+
+    expect(commentIcon).not.toBeNull();
+    expect(commentIcon).toBeInstanceOf(HTMLElement);
+    expect(commentIcon.tagName).toBe('I');
+  });
 
   test('Font Awesome을 이용한 알림 아이콘이 있어야 합니다.', () => {
-    const { container } = render(
-      // <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-      <App dummyTweets={[]} dummyNotis={[]} />
-    );
+    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
     const notificationIcon = container.querySelector('.far.fa-bell');
 
     expect(notificationIcon).not.toBeNull();
@@ -40,13 +45,13 @@ describe('Sidebar.js Icon', () => {
 });
 
 describe('App.js Components', () => {
-  test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Features, Mypage, Notifications 컴포넌트가 있어야 합니다.', () => {
+  test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Tweets, Mypage, Notifications 컴포넌트가 있어야 합니다.', () => {
     const appInstance = TestRenderer.create(
       <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
     ).root;
 
     expect(appInstance.findByType(Sidebar).type).toBe(Sidebar);
-    expect(appInstance.findByType(Features).type).toBe(Features);
+    expect(appInstance.findByType(Tweets).type).toBe(Tweets);
 
     const { container } = render(
       <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
@@ -87,23 +92,23 @@ describe('App.js Components', () => {
     );
   });
 
-  test('Features 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
+  test('Tweets 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
     const appInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
       .root;
 
     expect(appInstance.findByType(Footer).type).toBe(Footer);
   });
 
-  test('Features 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
-    const featuresInstance = TestRenderer.create(
-      <Features dummyTweets={dummyTweets} />
+  test('Tweets 컴포넌트 props에 dummyTweets가 전달되어야 합니다.', () => {
+    const TweetsInstance = TestRenderer.create(
+      <Tweets dummyTweets={dummyTweets} />
     ).root;
-    const featuresInstanceWithThreeTweets = TestRenderer.create(
-      <Features dummyTweets={dummyTweets.slice(0, 3)} />
+    const TweetsInstanceWithThreeTweets = TestRenderer.create(
+      <Tweets dummyTweets={dummyTweets.slice(0, 3)} />
     ).root;
 
-    expect(featuresInstance.props.dummyTweets).toBe(dummyTweets);
-    expect(featuresInstanceWithThreeTweets.props.dummyTweets).toEqual(
+    expect(TweetsInstance.props.dummyTweets).toBe(dummyTweets);
+    expect(TweetsInstanceWithThreeTweets.props.dummyTweets).toEqual(
       dummyTweets.slice(0, 3)
     );
   });
@@ -115,8 +120,10 @@ describe('React Router', () => {
     const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
-      const isDirHere = await access(join(defaultPath));
-      haveReactRouterDom = true;
+      if (defaultPath) haveReactRouterDom = true;
+
+      // const isDirHere = await access(join(defaultPath));
+      // console.log('주소', await access(join(defaultPath)));
     } catch (e) {
       console.log('react-router-dom is not installed');
     }
@@ -151,13 +158,15 @@ describe('React Router', () => {
 
   test('마이페이지 메뉴를 누르면 /mypage 로 렌더링 되어야 합니다.', async () => {
     const myPagePath = '/mypage';
-    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
+    const { container } = render(
+      <App dummyTweets={dummyTweets} dummyNotis={[]} />
+    );
 
     const mypageIcon = container.querySelector('.far.fa-user');
     userEvent.click(mypageIcon);
 
     const routeInstance = TestRenderer.create(
-      <App dummyTweets={[]} dummyNotis={[]} />
+      <App dummyTweets={dummyTweets} dummyNotis={[]} />
     ).root;
 
     expect(routeInstance.findByType(Route).props.path).toBe(myPagePath);
