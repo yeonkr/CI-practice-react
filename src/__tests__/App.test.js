@@ -120,10 +120,8 @@ describe('React Router', () => {
     const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
-      if (defaultPath) haveReactRouterDom = true;
-
-      // const isDirHere = await access(join(defaultPath));
-      // console.log('주소', await access(join(defaultPath)));
+      await access(join(defaultPath));
+      haveReactRouterDom = true;
     } catch (e) {
       console.log('react-router-dom is not installed');
     }
