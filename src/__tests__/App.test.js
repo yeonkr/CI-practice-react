@@ -114,20 +114,20 @@ describe('App.js Components', () => {
 
 describe('React Router', () => {
   test('react-router-dom 를 npm 으로 설치해야 합니다. (react-router-dom)', async () => {
-    let haveReactRouterDom = false;
+    let isReactRouterDomInstalled = false;
     const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
       await access(join(defaultPath));
-      haveReactRouterDom = true;
+      isReactRouterDomInstalled = true;
     } catch (e) {
       console.log('react-router-dom is not installed');
     }
 
-    expect(haveReactRouterDom).toBe(true);
+    expect(isReactRouterDomInstalled).toBe(true);
   });
 
-  test('처음 접속 시, "/" 으로 렌더링 되어야 합니다.', async () => {
+  test('처음 접속 시, URL path가 "/" 이여야 합니다.', async () => {
     const rootPath = '/';
     const routeInstance = TestRenderer.create(
       <App dummyTweets={[]} dummyNotis={[]} />
@@ -137,7 +137,7 @@ describe('React Router', () => {
     expect(location.pathname).toBe(rootPath);
   });
 
-  test('알림 메뉴를 누르면 /notification 으로 렌더링되어야 합니다.', async () => {
+  test('알림 메뉴를 누르면 URL path가 /notification로 라우트 되어야 합니다.', async () => {
     const notificationPath = '/notification';
     const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
 
@@ -152,7 +152,7 @@ describe('React Router', () => {
     expect(location.pathname).toBe(notificationPath);
   });
 
-  test('마이페이지 메뉴를 누르면 /mypage 로 렌더링 되어야 합니다.', async () => {
+  test('마이페이지 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
     const myPagePath = '/mypage';
     const { container } = render(
       <App dummyTweets={dummyTweets} dummyNotis={[]} />
