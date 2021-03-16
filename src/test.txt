@@ -1,6 +1,0 @@
-//! App.test
-// React router dom 라이브러리 설치하기
-// 해당 라이브러리에서 메소드 꺼내오기(import)
-// path 경로가 mypage, notification 으로 설정되었는지 체크
-// import를 써서 컴포넌트 갯수 체크 : Sidebar, Footer, Notification, Mypage, Home
-// sidebar 에 Link 컴포넌트 쓰고 있는지 체크

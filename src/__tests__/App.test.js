@@ -3,10 +3,8 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import TestRenderer from 'react-test-renderer';
-//? 라이브러리 설치 테스트
 import { access } from 'fs/promises';
 import { join } from 'path';
-//! router test
 import { Route } from 'react-router-dom';
 
 import { App, Sidebar, Footer } from '../App';

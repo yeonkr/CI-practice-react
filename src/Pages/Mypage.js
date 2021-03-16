@@ -1,14 +1,10 @@
 import React from 'react';
-import Footer from '../Footer';
-import Tweet from '../Components/Tweet';
+// TODO - import 구문을 이용하여 Tweet 과 Footer 컴포넌트를 불러오세요.
 import './Mypage.css';
 
-const Mypage = (props) => {
-  const { dummyTweets } = props;
-
-  const filterKimCoding = dummyTweets.filter(
-    (tweet) => tweet.username === 'kimcoding'
-  );
+const Mypage = ({ dummyTweets }) => {
+  //TODO - Filter 함수를 이용하여 dummyTweets 의 kimcoding 만 표시하세요.
+  const filterKimCoding = [];
 
   return (
     <section className="myInfo">
@@ -26,15 +22,16 @@ const Mypage = (props) => {
         </div>
       </div>
       <ul className="tweets">
-        {filterKimCoding.map((tweet) => {
-          return <Tweet key={tweet.id} tweet={tweet} />;
-        })}
+        {/* TODO
+            1. Tweet 컴포넌트를 이용하여 filterKimCoding 에 담긴 트윗 정보를 모두 렌더링 할 수 있어야 합니다. 
+            //! 아래처럼 알려줘도 될지 아니면 위와 같이 적어둘지 고민
+            2. Tweet 컴포넌트에 props는 tweet={tweet} 의 형태로 넣습니다.
+            3. Tweet 컴포넌트에 key는 tweet.id 를 넣습니다.
+        */}
       </ul>
-      <Footer />
+      {/* TODO - 이곳에 Footer 컴포넌트가 위치해야합니다. */}
     </section>
   );
 };
 
 export default Mypage;
-// export { Mypage, Tweets, Footer };
-//Todo - Advanced : filter 함수를 이용하여 특정 유저의 정보만 담아보세요.
