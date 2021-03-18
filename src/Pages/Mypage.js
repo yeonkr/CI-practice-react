@@ -36,5 +36,3 @@ const Mypage = (props) => {
 };
 
 export default Mypage;
-// export { Mypage, Tweets, Footer };
-//Todo - Advanced : filter 함수를 이용하여 특정 유저의 정보만 담아보세요.
