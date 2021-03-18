@@ -1,7 +1,6 @@
 .myInfo {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--main-border-color);
   flex: 1 0 0;
 }
 
