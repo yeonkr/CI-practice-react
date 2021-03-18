@@ -75,46 +75,4 @@ const dummyTweets = [
   },
 ];
 
-const dummyNotis = [
-  {
-    id: 1,
-    content:
-      'Elon Mask님이 트윗을 전송했습니다. : Don’t want to blow your mind, but I’m pretty weird. It’s time the world knew.',
-    createdAt: '2019-02-24T16:17:51.000Z',
-    updatedAt: '2019-02-24T16:17:51.000Z',
-    username: 'Elon Mask',
-  },
-  {
-    id: 2,
-    content: 'Steve Jubs님이 Codestates님을 팔로우했습니다.',
-    createdAt: '2019-02-24T16:17:51.000Z',
-    updatedAt: '2019-02-24T16:17:51.000Z',
-    username: 'Steve Jubs',
-  },
-  {
-    id: 3,
-    content:
-      "Linkun Perk님이 트윗을 전송했습니다. : In the end, it doesn't even matter.",
-    createdAt: '2019-02-24T16:17:51.000Z',
-    updatedAt: '2019-02-24T16:17:51.000Z',
-    username: 'Linkun Perk',
-  },
-  {
-    id: 4,
-    content:
-      'Cute Cobain 님이 트윗을 전송했습니다. : Wanting to be someone else is a waste of the person you are.',
-    createdAt: '2019-02-24T16:17:51.000Z',
-    updatedAt: '2019-02-24T16:17:51.000Z',
-    username: 'Cute Cobain',
-  },
-  {
-    id: 5,
-    content:
-      'Ma Yun 님이 트윗을 전송했습니다. : Forget about your competitors, just focus on your customers.',
-    createdAt: '2019-02-24T16:17:51.000Z',
-    updatedAt: '2019-02-24T16:17:51.000Z',
-    username: 'Ma Yun',
-  },
-];
-
-export { dummyTweets, dummyNotis };
+export { dummyTweets };

@@ -7,8 +7,8 @@ const Sidebar = () => {
       <Link to="/">
         <i className="far fa-comment-dots"></i>
       </Link>
-      <Link to="/notification">
-        <i className="far fa-bell"></i>
+      <Link to="/about">
+        <i className="far fa-question-circle"></i>
       </Link>
       <Link to="/mypage">
         <i className="far fa-user"></i>

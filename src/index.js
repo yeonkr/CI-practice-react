@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
 
-import { dummyTweets, dummyNotis } from './static/dummyData';
+import { dummyTweets } from './static/dummyData';
 
 ReactDOM.render(
-  <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />,
+  <App dummyTweets={dummyTweets} />,
   document.getElementById('root')
 );

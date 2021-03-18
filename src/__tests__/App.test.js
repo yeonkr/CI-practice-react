@@ -3,21 +3,19 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import TestRenderer from 'react-test-renderer';
-//? 라이브러리 설치 테스트
 import { access } from 'fs/promises';
 import { join } from 'path';
-//! router test
 import { Route } from 'react-router-dom';
 
 import { App, Sidebar, Footer } from '../App';
 import Tweets from '../Pages/Tweets';
 import Mypage from '../Pages/Mypage';
-import Notifications from '../Pages/Notifications';
-import { dummyNotis, dummyTweets } from '../static/dummyData';
+import About from '../Pages/About';
+import { dummyTweets } from '../static/dummyData';
 
 describe('Sidebar.js Icon', () => {
   test('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.', () => {
-    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
+    const { container } = render(<App dummyTweets={[]} />);
     const commentIcon = container.querySelector('.far.fa-comment-dots');
 
     expect(commentIcon).not.toBeNull();
@@ -25,17 +23,17 @@ describe('Sidebar.js Icon', () => {
     expect(commentIcon.tagName).toBe('I');
   });
 
-  test('Font Awesome을 이용한 알림 아이콘이 있어야 합니다.', () => {
-    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
-    const notificationIcon = container.querySelector('.far.fa-bell');
+  test('Font Awesome을 이용한 정보 아이콘이 있어야 합니다.', () => {
+    const { container } = render(<App dummyTweets={[]} />);
+    const aboutIcon = container.querySelector('.far.fa-question-circle');
 
-    expect(notificationIcon).not.toBeNull();
-    expect(notificationIcon).toBeInstanceOf(HTMLElement);
-    expect(notificationIcon.tagName).toBe('I');
+    expect(aboutIcon).not.toBeNull();
+    expect(aboutIcon).toBeInstanceOf(HTMLElement);
+    expect(aboutIcon.tagName).toBe('I');
   });
 
   test('Font Awesome을 이용한 마이페이지 아이콘이 있어야 합니다.', () => {
-    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
+    const { container } = render(<App dummyTweets={[]} />);
     const mypageIcon = container.querySelector('.far.fa-user');
 
     expect(mypageIcon).not.toBeNull();
@@ -45,36 +43,30 @@ describe('Sidebar.js Icon', () => {
 });
 
 describe('App.js Components', () => {
-  test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Tweets, Mypage, Notifications 컴포넌트가 있어야 합니다.', () => {
-    const appInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    ).root;
+  test('App 컴포넌트의 자식 컴포넌트로 Sidebar, Tweets, Mypage, About 컴포넌트가 있어야 합니다.', () => {
+    const appInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
+      .root;
 
     expect(appInstance.findByType(Sidebar).type).toBe(Sidebar);
     expect(appInstance.findByType(Tweets).type).toBe(Tweets);
 
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    );
+    const { container } = render(<App dummyTweets={dummyTweets} />);
 
     const mainIcon = container.querySelector('.far.fa-comment-dots');
-    const notificationIcon = container.querySelector('.far.fa-bell');
+    const aboutcon = container.querySelector('.far.fa-question-circle');
     const mypageIcon = container.querySelector('.far.fa-user');
 
     userEvent.click(mypageIcon);
     const mypageInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
+      <App dummyTweets={dummyTweets} />
     ).root;
     expect(mypageInstance.findByType(Route).props.children.type).toBe(Mypage);
 
-    userEvent.click(notificationIcon);
-    const notiInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={dummyNotis} />
-    ).root;
+    userEvent.click(aboutcon);
+    const aboutInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
+      .root;
 
-    expect(notiInstance.findByType(Route).props.children.type).toBe(
-      Notifications
-    );
+    expect(aboutInstance.findByType(Route).props.children.type).toBe(About);
 
     userEvent.click(mainIcon);
   });
@@ -116,56 +108,49 @@ describe('App.js Components', () => {
 
 describe('React Router', () => {
   test('react-router-dom 를 npm 으로 설치해야 합니다. (react-router-dom)', async () => {
-    let haveReactRouterDom = false;
+    let isReactRouterDomInstalled = false;
     const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
       await access(join(defaultPath));
-      haveReactRouterDom = true;
+      isReactRouterDomInstalled = true;
     } catch (e) {
       console.log('react-router-dom is not installed');
     }
 
-    expect(haveReactRouterDom).toBe(true);
+    expect(isReactRouterDomInstalled).toBe(true);
   });
 
-  test('처음 접속 시, "/" 으로 렌더링 되어야 합니다.', async () => {
+  test('처음 접속 시, URL path가 "/" 이여야 합니다.', async () => {
     const rootPath = '/';
-    const routeInstance = TestRenderer.create(
-      <App dummyTweets={[]} dummyNotis={[]} />
-    ).root;
+    const routeInstance = TestRenderer.create(<App dummyTweets={[]} />).root;
 
     expect(routeInstance.findByType(Route).props.path).toBe(rootPath);
     expect(location.pathname).toBe(rootPath);
   });
 
-  test('알림 메뉴를 누르면 /notification 으로 렌더링되어야 합니다.', async () => {
-    const notificationPath = '/notification';
-    const { container } = render(<App dummyTweets={[]} dummyNotis={[]} />);
+  test('정보 메뉴를 누르면 URL path가 /about으로 라우트 되어야 합니다.', async () => {
+    const aboutPath = '/about';
+    const { container } = render(<App dummyTweets={[]} />);
 
-    const notificationIcon = container.querySelector('.far.fa-bell');
-    userEvent.click(notificationIcon);
+    const aboutIcon = container.querySelector('.far.fa-question-circle');
+    userEvent.click(aboutIcon);
 
-    const routeInstance = TestRenderer.create(
-      <App dummyTweets={[]} dummyNotis={[]} />
-    ).root;
+    const routeInstance = TestRenderer.create(<App dummyTweets={[]} />).root;
 
-    expect(routeInstance.findByType(Route).props.path).toBe(notificationPath);
-    expect(location.pathname).toBe(notificationPath);
+    expect(routeInstance.findByType(Route).props.path).toBe(aboutPath);
+    expect(location.pathname).toBe(aboutPath);
   });
 
-  test('마이페이지 메뉴를 누르면 /mypage 로 렌더링 되어야 합니다.', async () => {
+  test('마이페이지 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
     const myPagePath = '/mypage';
-    const { container } = render(
-      <App dummyTweets={dummyTweets} dummyNotis={[]} />
-    );
+    const { container } = render(<App dummyTweets={dummyTweets} />);
 
     const mypageIcon = container.querySelector('.far.fa-user');
     userEvent.click(mypageIcon);
 
-    const routeInstance = TestRenderer.create(
-      <App dummyTweets={dummyTweets} dummyNotis={[]} />
-    ).root;
+    const routeInstance = TestRenderer.create(<App dummyTweets={dummyTweets} />)
+      .root;
 
     expect(routeInstance.findByType(Route).props.path).toBe(myPagePath);
     expect(location.pathname).toBe(myPagePath);

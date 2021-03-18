@@ -1,18 +1,14 @@
 import React from 'react';
-// react-router-dom
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// Route Pages - Sidebar, Footer, Mypage, Notifications, Features
 import Sidebar from './Sidebar';
 import Footer from './Footer';
-// import Features from './Features';
 import Tweets from './Pages/Tweets';
 import Mypage from './Pages/Mypage';
-import Notifications from './Pages/Notifications';
-
+import About from './Pages/About';
 import './App.css';
 
 const App = (props) => {
-  const { dummyTweets, dummyNotis } = props;
+  const { dummyTweets } = props;
 
   return (
     <BrowserRouter>
@@ -24,8 +20,8 @@ const App = (props) => {
               <Route path="/mypage">
                 <Mypage dummyTweets={dummyTweets} />
               </Route>
-              <Route path="/notification">
-                <Notifications dummyNotis={dummyNotis} />
+              <Route path="/about">
+                <About />
               </Route>
               <Route exact path="/">
                 <Tweets dummyTweets={dummyTweets} />

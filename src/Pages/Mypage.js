@@ -6,7 +6,7 @@ import './Mypage.css';
 const Mypage = (props) => {
   const { dummyTweets } = props;
 
-  const filterKimCoding = dummyTweets.filter(
+  const filteredTweets = dummyTweets.filter(
     (tweet) => tweet.username === 'kimcoding'
   );
 
@@ -15,18 +15,18 @@ const Mypage = (props) => {
       <div className="myInfo__container">
         <div className="myInfo__wrapper">
           <div className="myInfo__profile">
-            <img src={filterKimCoding[0].picture} />
+            <img src={filteredTweets[0].picture} />
           </div>
           <div className="myInfo__detail">
             <p className="myInfo__detailName">
-              {filterKimCoding[0].username} Profile
+              {filteredTweets[0].username} Profile
             </p>
             <p>28 팔로워 100 팔로잉</p>
           </div>
         </div>
       </div>
       <ul className="tweets">
-        {filterKimCoding.map((tweet) => {
+        {filteredTweets.map((tweet) => {
           return <Tweet key={tweet.id} tweet={tweet} />;
         })}
       </ul>
