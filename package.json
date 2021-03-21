@@ -1,5 +1,5 @@
 {
-  "name": "pre-sprint-react-twittler-intro",
+  "name": "pre-sprint-react-twittler-spa",
   "author": "Hong Shik Branden Kim <kimploo@gmail.com>",
   "version": "1.0.0",
   "private": true,
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false",
+    "test": "react-scripts test --watchAll=false --verbose",
     "watch": "react-scripts test --verbose",
     "report": "react-scripts test --watchAll=false --json --outputFile=report.jest.json",
     "submit": "codestates-submission"
