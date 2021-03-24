@@ -1,10 +1,20 @@
 import React from 'react';
 // TODO - import문을 이용하여 react-router-dom 라이브러리의 Link 컴포넌트를 불러오세요.
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
     <section className="sidebar">
+      <Link to="/">
       <i className="far fa-comment-dots"></i>
+      </Link>
+      <Link to="/about">
+      <i className="far fa-question-circle"></i>
+      </Link>
+      <Link to="/mypage">
+      <i className="far fa-user"></i>
+      </Link>
+
       {/* TODO 
           1. class 이름이 far fa-question-circle 인 Font Awesome 아이콘을 넣는 코드를 여기에 작성합니다.
           2. class 이름이 far fa-user 인 Font Awesome 아이콘을 넣는 코드를 여기에 작성합니다.

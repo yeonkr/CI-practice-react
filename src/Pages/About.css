@@ -5,7 +5,6 @@
 }
 
 .aboutTwittler__container {
-  width: 564px;
   border-bottom: 1px solid var(--main-border-color);
   margin-bottom: 0.5rem;
 }
@@ -32,7 +31,7 @@
 
 .aboutTwittler__content {
   flex: 1 0 80vh;
-  border: 1px solid var(--main-border-color);
+  border: 1px solid var(--about-component-color);
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

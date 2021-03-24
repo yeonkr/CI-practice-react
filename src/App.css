@@ -14,6 +14,10 @@
   --bold-text-color: rgb(15, 20, 25);
   --button-text-color: rgb(255, 255, 255);
   --shade-color: rgb(229, 229, 229);
+  --sidebar-component-color: #ff577f;
+  --mypage-component-color: #ffc764;
+  --about-component-color: #0cc276;
+  --tweets-component-color: #007580;
 }
 
 body {
@@ -95,6 +99,7 @@ main {
 }
 
 .features {
+  width: 564px;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--main-border-color);

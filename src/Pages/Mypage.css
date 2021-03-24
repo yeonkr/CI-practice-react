@@ -33,3 +33,9 @@
   height: 80px;
   border-radius: 100%;
 }
+
+.tweets__mypage{
+  flex: 1 0 80vh;
+  border: 1px solid var(--mypage-component-color);
+  overflow-y: scroll;
+}

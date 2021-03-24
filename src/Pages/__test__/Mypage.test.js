@@ -14,7 +14,13 @@ describe('Mypage.js Components', () => {
       <Mypage dummyTweets={dummyTweets.slice(0, 1)} />
     ).root;
 
-    expect(mypageInstance.findByType(Tweet).type).toBe(Tweet);
+      
+    const elementList = mypageInstance.findAllByType(Tweet)
+
+    elementList.forEach((el)=>{
+      expect(el.findByType(Tweet).type).toBe(Tweet);
+    })
+    
     expect(mypageInstance.findByType(Footer).type).toBe(Footer);
   });
 });
@@ -41,7 +47,10 @@ describe('Mypage 데이터 렌더링 테스트', () => {
           Object.assign({}, ...dummyTweets.slice(0, 1), { id: addIdx++ })
         );
       }
-      const { queryAllByText } = render(<Mypage dummyTweets={testTweets} />);
+
+      //마이페이지 안에 필터를 넣는게 아니라... 위 테스트 트윗을 넣어야함...
+
+      const { queryAllByText } = render(<Mypage dummyTweets={testTweets}/>);
 
       expect(queryAllByText('kimcoding')).toHaveLength(3);
     });

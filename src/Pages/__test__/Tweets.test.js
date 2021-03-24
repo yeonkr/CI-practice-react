@@ -13,8 +13,13 @@ describe('Tweets.js Components', () => {
     const tweetsInstance = TestRenderer.create(
       <Tweets dummyTweets={dummyTweets.slice(0, 1)} />
     ).root;
+   
+    const elementList = tweetsInstance.findAllByType(Tweet)
 
-    expect(tweetsInstance.findByType(Tweet).type).toBe(Tweet);
+    elementList.forEach((el)=>{
+      expect(el.findByType(Tweet).type).toBe(Tweet);
+    })
+     
     expect(tweetsInstance.findByType(Footer).type).toBe(Footer);
   });
 });
