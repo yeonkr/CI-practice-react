@@ -8,7 +8,8 @@ import Tweet from '../Components/Tweet';
 import Footer from '../Footer';
 
 const Mypage = () => {
-  // const filteredTweets = dummyTweets; // TODO - filter 메소드를 이용하여 username이 kimcoding인 요소만 있는 배열을 filteredTweet에 할당합니다.
+  // TODO - filter 메소드를 이용하여 username이 kimcoding인 요소만 있는 배열을 filteredTweet에 할당합니다.
+  // const filteredTweets = dummyTweets;
   const filteredTweets = dummyTweets.filter(
     (tweet) => tweet.username === 'kimcoding'
   );
@@ -29,13 +30,14 @@ const Mypage = () => {
       </div>
       <ul className="tweets__mypage">
         {/* TODO - Tweet 컴포넌트를 이용하여 filteredTweets에 담긴 트윗 정보를 보여줄 수 있어야 합니다. */}
-        {/* {filteredTweets.map((tweet) => {
+        {filteredTweets.map((tweet) => {
           return <Tweet key={tweet.id} tweet={tweet} />;
-        })} */}
-        TODO : kimcoding 이 작성한 트윗 메세지만 있어야 합니다.
+        })}
+        {/* TODO : kimcoding 이 작성한 트윗 메세지만 있어야 합니다. */}
       </ul>
       {/* TODO - Footer 컴포넌트를 작성합니다. */}
       TODO : Footer 컴포넌트를 작성합니다.
+      <Footer />
     </section>
   );
 };

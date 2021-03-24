@@ -94,7 +94,7 @@ describe('App.js React Router 컴포넌트 적용', () => {
 });
 
 describe('Sidebar.js 사이드바 구현', () => {
-  test('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.(className : ".far .fa-comment-dots")', () => {
+  test('Font Awesome을 이용한 Tweets 메뉴 아이콘이 있어야 합니다.(className : ".far .fa-comment-dots")', () => {
     const { container } = render(<App />);
     const commentIcon = container.querySelector('.far.fa-comment-dots');
 
@@ -103,7 +103,7 @@ describe('Sidebar.js 사이드바 구현', () => {
     expect(commentIcon.tagName).toBe('I');
   });
 
-  test('Font Awesome을 이용한 어바웃 아이콘이 있어야 합니다.(className : ".far.fa-question-circle")', () => {
+  test('Font Awesome을 이용한 About 메뉴 아이콘이 있어야 합니다.(className : ".far .fa-question-circle")', () => {
     const { container } = render(<App />);
     const aboutIcon = container.querySelector('.far.fa-question-circle');
 
@@ -112,7 +112,7 @@ describe('Sidebar.js 사이드바 구현', () => {
     expect(aboutIcon.tagName).toBe('I');
   });
 
-  test('Font Awesome을 이용한 마이페이지 아이콘이 있어야 합니다.(className : ".far.fa-user")', () => {
+  test('Font Awesome을 이용한 Mypage 메뉴 아이콘이 있어야 합니다.(className : ".far .fa-user")', () => {
     const { container } = render(<App />);
     const mypageIcon = container.querySelector('.far.fa-user');
 
@@ -132,7 +132,7 @@ describe('Sidebar.js 사이드바 구현', () => {
       expect(sidebarInstance.findAllByType(Link)).toHaveLength(3);
     });
 
-    test('트윗 아이콘의 Link 컴포넌트는 "/" 로 연결되야 합니다.', () => {
+    test('Tweets 아이콘의 Link 컴포넌트는 "/" 로 연결되야 합니다.', () => {
       const { container } = render(<App />);
 
       const linkToAttr = container.querySelectorAll('a');
@@ -140,7 +140,7 @@ describe('Sidebar.js 사이드바 구현', () => {
       expect(linkToAttr[0]).toHaveAttribute('href', '/');
     });
 
-    test('어바웃 아이콘의 Link 컴포넌트는 "/about" 로 연결되야 합니다.', () => {
+    test('About 아이콘의 Link 컴포넌트는 "/about" 로 연결되야 합니다.', () => {
       const { container } = render(<App />);
 
       const linkToAttr = container.querySelectorAll('a');
@@ -148,7 +148,7 @@ describe('Sidebar.js 사이드바 구현', () => {
       expect(linkToAttr[1]).toHaveAttribute('href', '/about');
     });
 
-    test('마이페이지 아이콘의 Link 컴포넌트는 "/mypage" 로 연결되야 합니다.', () => {
+    test('Mypage 아이콘의 Link 컴포넌트는 "/mypage" 로 연결되야 합니다.', () => {
       const { container } = render(<App />);
 
       const linkToAttr = container.querySelectorAll('a');
@@ -168,7 +168,7 @@ describe('React Router로 SPA 구현하기', () => {
     expect(location.pathname).toBe(rootPath);
   });
 
-  test('정보 메뉴를 누르면 URL path가 /about으로 라우트 되어야 합니다.', async () => {
+  test('About 메뉴를 누르면 URL path가 /about으로 라우트 되어야 합니다.', async () => {
     const aboutPath = '/about';
     const { container } = render(<App />);
 
@@ -181,7 +181,7 @@ describe('React Router로 SPA 구현하기', () => {
     expect(location.pathname).toBe(aboutPath);
   });
 
-  test('마이페이지 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
+  test('Mypage 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
     const myPagePath = '/mypage';
     const { container } = render(<App />);
 
