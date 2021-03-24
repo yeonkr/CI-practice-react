@@ -49,50 +49,41 @@ describe("App.js React Router 컴포넌트 적용", () => {
     expect(appInstance.findByType(Route).type).toBe(Route);
   });
 
-  test("App 컴포넌트의 자식 컴포넌트로 Sidebar 컴포넌트가 있어야 합니다.", () => {
+  test("App 컴포넌트의 후손 컴포넌트로 Sidebar 컴포넌트가 있어야 합니다.", () => {
     const appInstance = TestRenderer.create(<App />).root;
     expect(appInstance.findByType(Sidebar).type).toBe(Sidebar);
   })
 
-  test("App 컴포넌트의 자식 컴포넌트로 Tweets 컴포넌트가 있어야 합니다.", () => {
-    const appInstance = TestRenderer.create(<App />).root;
-    expect(appInstance.findByType(Tweets).type).toBe(Tweets);
-    // 컴포넌트가 있어야 하고
+  describe("주소에 따른 페이지 뷰 구현을 위해", () => {
+    test('Route path가 "/" 인 Tweets 컴포넌트가 있어야 합니다.', () => {
+      const rootPath = "/"
+      const appInstance = TestRenderer.create(<App />).root;
 
-    expect(appInstance.findByType(Route).props.children.type).toBe(Tweets);
-    // 눌럿을 때 테스트를 해봤다.
+      expect(appInstance.findByType(Switch).props.children[0].props.path).toBe(rootPath)
+      expect(appInstance.findByType(Switch).props.children[0].props.children.type).toBe(Tweets)
+    })
+
+    test('Route path가 "/about" 인 About 컴포넌트가 있어야 합니다.', () => {
+      const aboutPath = "/about";
+      const appInstance = TestRenderer.create(<App />).root;
+
+      expect(appInstance.findByType(Switch).props.children[1].props.path).toBe(aboutPath)
+      expect(appInstance.findByType(Switch).props.children[1].props.children.type).toBe(About)
+    })
+
+    test('Route path가 "/mypage" 인 Mypage 컴포넌트가 있어야 합니다.', () => {
+      const mypagePath = "/mypage";
+      const appInstance = TestRenderer.create(<App />).root;
+
+      expect(appInstance.findByType(Switch).props.children[2].props.path).toBe(mypagePath)
+      expect(appInstance.findByType(Switch).props.children[2].props.children.type).toBe(Mypage)
+    })
+
   })
-
-  test("App 컴포넌트의 자식 컴포넌트로 Sidebar, Tweets, Mypage, About 컴포넌트가 있어야 합니다.", () => {
-    const appInstance = TestRenderer.create(<App />).root;
-
-    expect(appInstance.findByType(Sidebar).type).toBe(Sidebar);
-    expect(appInstance.findByType(Tweets).type).toBe(Tweets);
-    // 컴포넌트가 있어야 하고
-
-    const { container } = render(<App />);
-
-    const mainIcon = container.querySelector(".far.fa-comment-dots");
-    const aboutIcon = container.querySelector(".far.fa-question-circle");
-    const mypageIcon = container.querySelector(".far.fa-user");
-    
-
-    userEvent.click(mypageIcon);
-    // 눌럿을 때 테스트를 해봤다.
-    const mypageInstance = TestRenderer.create(<App />).root;
-    expect(mypageInstance.findByType(Route).props.children.type).toBe(Mypage);
-
-    userEvent.click(aboutIcon);
-    const aboutInstance = TestRenderer.create(<App />).root;
-
-    expect(aboutInstance.findByType(Route).props.children.type).toBe(About);
-
-    userEvent.click(mainIcon);
-  });
 });
 
-describe("Sidebar.js Icon", () => {
-  test("Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.", () => {
+describe("Sidebar.js 사이드바 구현", () => {
+  test('Font Awesome을 이용한 트윗 아이콘이 있어야 합니다.(className : ".far .fa-comment-dots")', () => {
     const { container } = render(<App />);
     const commentIcon = container.querySelector(".far.fa-comment-dots");
 
@@ -101,7 +92,7 @@ describe("Sidebar.js Icon", () => {
     expect(commentIcon.tagName).toBe("I");
   });
 
-  test("Font Awesome을 이용한 정보 아이콘이 있어야 합니다.", () => {
+  test('Font Awesome을 이용한 어바웃 아이콘이 있어야 합니다.(className : ".far.fa-question-circle")', () => {
     const { container } = render(<App />);
     const aboutIcon = container.querySelector(".far.fa-question-circle");
 
@@ -110,7 +101,7 @@ describe("Sidebar.js Icon", () => {
     expect(aboutIcon.tagName).toBe("I");
   });
 
-  test("Font Awesome을 이용한 마이페이지 아이콘이 있어야 합니다.", () => {
+  test('Font Awesome을 이용한 마이페이지 아이콘이 있어야 합니다.(className : ".far.fa-user")', () => {
     const { container } = render(<App />);
     const mypageIcon = container.querySelector(".far.fa-user");
 
@@ -119,20 +110,45 @@ describe("Sidebar.js Icon", () => {
     expect(mypageIcon.tagName).toBe("I");
   });
 
-  test("React Router 컴포넌트로 Link 컴포넌트가 3개 있어야 합니다.", () => {
-    const sidebarInstance = TestRenderer.create(
-      <BrowserRouter>
-        <Sidebar />
-      </BrowserRouter>
-    ).root;
+  describe("Sidebar 컴포넌트에는", () => {
+    test("React Router의 Link 컴포넌트가 3개 있어야 합니다.", () => {
+      const sidebarInstance = TestRenderer.create(
+        <BrowserRouter>
+          <Sidebar />
+        </BrowserRouter>
+      ).root;
 
-    // expect(sidebarInstance.findByType(Link).type).toBe(Link);
-    // 위와 같이 적용했을 경우, 생성된 링크컴포넌트가 3개여서 오류 생성
-    expect(sidebarInstance.findAllByType(Link)).toHaveLength(3);
-  });
+      expect(sidebarInstance.findAllByType(Link)).toHaveLength(3);
+    });
+
+    test('트윗 아이콘의 Link 컴포넌트는 "/" 로 연결되야 합니다.', () => {
+      const { container } = render(<App />);
+
+      const linkToAttr = container.querySelectorAll("a")
+      
+      expect(linkToAttr[0].getAttribute("href")).toBe("/")
+    });
+
+    test('어바웃 아이콘의 Link 컴포넌트는 "/about" 로 연결되야 합니다.', () => {
+      const { container } = render(<App />);
+
+      const linkToAttr = container.querySelectorAll("a")
+      
+      expect(linkToAttr[1].getAttribute("href")).toBe("/about")
+    });
+ 
+    test('마이페이지 아이콘의 Link 컴포넌트는 "/mypage" 로 연결되야 합니다.', () => {
+      const { container } = render(<App />);
+
+      const linkToAttr = container.querySelectorAll("a")
+      
+      expect(linkToAttr[2].getAttribute("href")).toBe("/mypage")
+    });
+
+  })
 });
 
-describe("React Router", () => {
+describe("React Router로 SPA 구현하기", () => {
   test('처음 접속 시, URL path가 "/" 이여야 합니다.', async () => {
     const rootPath = "/";
     const routeInstance = TestRenderer.create(<App />).root;

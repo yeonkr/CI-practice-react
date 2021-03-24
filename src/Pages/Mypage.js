@@ -3,7 +3,7 @@ import { dummyTweets } from '../static/dummyData';
 import './Mypage.css';
 // ! 위 코드는 수정하지 않습니다.
 
-// TODO - import문을 이용하여 Tweet, Footer 컴포넌트를 불러오세요.
+// TODO - import문을 이용하여 Tweet, Footer 컴포넌트를 불러옵니다.
 import Tweet from "../Components/Tweet"
 import Footer from "../Footer"
 

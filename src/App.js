@@ -12,28 +12,27 @@ import Tweets from './Pages/Tweets';
 const App = () => {
   return (
     <React.Fragment>
-      {/*TODO - BrowserRouter 컴포넌트를 작성합니다. */}
+      {/* TODO - BrowserRouter 컴포넌트를 작성합니다. */}
       <BrowserRouter>
       <div className="App">
         <main>
           <Sidebar />
           <section className="features">
-            {/* TODO - 
-                1. Switch와 Route 컴포넌트를 이용하여 경로를 설정하고 Tweets, Mypage, About 컴포넌트를 연결합니다.
+            {/* TODO
+                1. Switch와 Route 컴포넌트를 이용하여 경로(path)를 설정하고 Tweets, Mypage, About 컴포넌트를 연결합니다.
                   1-1. Tweets 컴포넌트의 path는 "/" 이며, "/" 이 포함된 다른 경로로 접속이 불가해야 합니다. ex) "/foo"
                   1-2. About 컴포넌트의 path는 "/about" 입니다.
                   1-3. Mypage 컴포넌트의 path는 "/mypage" 입니다.
-                2. Mypage 컴포넌트에는 dummyTweets가 props로 전달되어야 합니다.
              */}
              <Switch>
-               <Route path="/mypage">
-                 <Mypage />
+             <Route exact path="/">
+               <Tweets />
                </Route>
                <Route path="/about">
                  <About />
                </Route>
-               <Route exact path="/">
-               <Tweets />
+               <Route path="/mypage">
+                 <Mypage />
                </Route>
              </Switch>
           </section>

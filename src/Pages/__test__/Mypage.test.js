@@ -12,6 +12,7 @@ describe("Mypage.js Components", () => {
   test("Mypage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.", () => {
     const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
       .root;
+      
     const elementList = mypageInstance.findAllByType(Tweet);
 
     elementList.forEach((el) => {

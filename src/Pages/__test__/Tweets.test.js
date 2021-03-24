@@ -10,17 +10,17 @@ import { dummyTweets } from "../../static/dummyData";
 
 describe("Tweets.js Components", () => {
   test("Tweets 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.", () => {
-    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={} />).root;
+    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />).root;
+
     const elementList = tweetsInstance.findAllByType(Tweet);
 
     elementList.forEach((el) => {
       expect(el.findByType(Tweet).type).toBe(Tweet);
     });
-    expect(tweetsInstance.findByType(Footer).type).toBe(Footer);
   });
 
   test("Tweets 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.", () => {
-    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={} />).root;
+    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />).root;
 
     expect(tweetsInstance.findByType(Footer).type).toBe(Footer);
   });
