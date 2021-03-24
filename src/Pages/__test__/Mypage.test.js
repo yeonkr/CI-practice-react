@@ -13,11 +13,7 @@ describe("Mypage.js Components", () => {
     const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
       .root;
       
-    const elementList = mypageInstance.findAllByType(Tweet);
-
-    elementList.forEach((el) => {
-      expect(el.findByType(Tweet).type).toBe(Tweet);
-    });
+      expect(mypageInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
   });
 
   test("Mypage 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.", () => {
