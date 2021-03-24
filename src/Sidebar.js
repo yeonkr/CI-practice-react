@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 const Sidebar = () => {
   return (
     <section className="sidebar">
+      {/* <i className="far fa-comment-dots"></i>
+
+      To do : 어바웃 아이콘과 마이 페이지 아이콘을 작성합니다. */}
       <Link to="/">
       <i className="far fa-comment-dots"></i>
       </Link>

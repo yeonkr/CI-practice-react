@@ -128,6 +128,7 @@ describe('React Router', () => {
     const rootPath = '/';
     const routeInstance = TestRenderer.create(<App />).root;
 
+    expect(routeInstance.findByType(Route).props.exact).toBe(true);
     expect(routeInstance.findByType(Route).props.path).toBe(rootPath);
     expect(location.pathname).toBe(rootPath);
   });

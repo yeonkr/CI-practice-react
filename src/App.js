@@ -32,7 +32,7 @@ const App = () => {
                <Route path="/about">
                  <About />
                </Route>
-               <Route path="/">
+               <Route exact path="/">
                <Tweets />
                </Route>
              </Switch>
