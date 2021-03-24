@@ -21,8 +21,8 @@ describe('App.js React Router 설치', () => {
     const defaultPath = join(process.cwd(), 'node_modules', 'react-router-dom');
 
     try {
-      await access(join(defaultPath));
       ReactRouterDom = await import('react-router-dom');
+      await access(join(defaultPath));
       isReactRouterDomInstalled = true;
     } catch (e) {
       console.log('react-router-dom is not installed');
