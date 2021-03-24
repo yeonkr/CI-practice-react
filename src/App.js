@@ -44,4 +44,4 @@ const App = () => {
 };
 
 // ! 아래 코드는 수정하지 않습니다.
-export { App, Sidebar, Footer };
+export default App;

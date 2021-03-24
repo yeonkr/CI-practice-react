@@ -29,12 +29,13 @@ const Mypage = () => {
       </div>
       <ul className="tweets__mypage">
         {/* TODO - Tweet 컴포넌트를 이용하여 filteredTweets에 담긴 트윗 정보를 보여줄 수 있어야 합니다. */}
-        {/* {filteredTweets.map((tweet) => {
+        {filteredTweets.map((tweet) => {
           return <Tweet key={tweet.id} tweet={tweet} />;
-        })} */}
+        })}
         TODO : kimcoding 이 작성한 트윗 메세지만 있어야 합니다.
       </ul>
       {/* TODO - Footer 컴포넌트를 작성합니다. */}
+      <Footer />
       TODO : Footer 컴포넌트를 작성합니다.
     </section>
   );
