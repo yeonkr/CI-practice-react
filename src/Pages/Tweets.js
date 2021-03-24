@@ -32,7 +32,6 @@ const Tweets = () => {
         {/* TODO : 트윗 메세지가 있어야 합니다. */}
       </ul>
       {/* TODO - Footer 컴포넌트를 작성합니다. */}
-      TODO : Footer 컴포넌트를 작성합니다.
       <Footer />
     </React.Fragment>
   );

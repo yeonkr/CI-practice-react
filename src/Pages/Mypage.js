@@ -36,7 +36,6 @@ const Mypage = () => {
         {/* TODO : kimcoding 이 작성한 트윗 메세지만 있어야 합니다. */}
       </ul>
       {/* TODO - Footer 컴포넌트를 작성합니다. */}
-      TODO : Footer 컴포넌트를 작성합니다.
       <Footer />
     </section>
   );
