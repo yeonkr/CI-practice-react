@@ -1,6 +1,6 @@
 import React from 'react';
-// TODO - import문을 이용하여 Footer 컴포넌트를 불러오세요.
 import './About.css';
+import Footer from "../Footer"
 
 const About = (props) => {
   return (
@@ -16,8 +16,7 @@ const About = (props) => {
         <i className="fas fa-users"></i>
         <p>나만의 Twittler 소개페이지를 꾸며보세요.</p>
       </div>
-      {/* TODO - Footer 컴포넌트를 작성합니다. */}
-      TODO : Footer 컴포넌트를 작성합니다.
+      <Footer />
     </section>
   );
 };
