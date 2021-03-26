@@ -14,6 +14,9 @@
   --bold-text-color: rgb(15, 20, 25);
   --button-text-color: rgb(255, 255, 255);
   --shade-color: rgb(229, 229, 229);
+  --mypage-component-color: #eb9705;
+  --about-component-color: #097e4d;
+  --tweets-component-color: #003380;
 }
 
 body {
@@ -95,6 +98,7 @@ main {
 }
 
 .features {
+  width: 564px;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--main-border-color);
@@ -110,6 +114,7 @@ main {
   display: flex;
   flex-direction: row;
   padding: 0.5rem 1rem;
+  background-color: var(--tweets-component-color);
 }
 
 .tweetForm__profile {
@@ -149,7 +154,7 @@ main {
 }
 
 .tweetForm__count__text {
-  color: var(--sub-text-color);
+  color: white;
 }
 
 .tweetForm__submit {
