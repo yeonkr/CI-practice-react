@@ -7,7 +7,6 @@ import Footer from '../../Footer';
 import Mypage from '../Mypage';
 import Tweet from '../../Components/Tweet';
 import { dummyTweets } from '../../static/dummyData';
-import ErrorBoundary from '../../static/ErrorBoundary';
 
 describe('Mypage.js Components', () => {
   test('Mypage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {

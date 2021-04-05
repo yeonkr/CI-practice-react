@@ -7,7 +7,6 @@ import Footer from '../../Footer';
 import Tweets from '../Tweets';
 import Tweet from '../../Components/Tweet';
 import { dummyTweets } from '../../static/dummyData';
-import ErrorBoundary from '../../static/ErrorBoundary';
 
 describe('Tweets.js Components', () => {
   test('Tweets 컴포넌트의 후손 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
