@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';
 // TODO - import문을 이용하여 Mypage, About 컴포넌트를 불러오세요.
-import Mypage from './Pages/Mypage';
+import Mypage from './Pages/MyPage';
 import About from './Pages/About';
 import Tweets from './Pages/Tweets';
 

@@ -10,7 +10,7 @@ import App from '../App';
 import Sidebar from '../Sidebar';
 import Footer from '../Footer';
 import Tweets from '../Pages/Tweets';
-import Mypage from '../Pages/Mypage';
+import MyPage from '../Pages/MyPage';
 import About from '../Pages/About';
 import Tweet from '../Components/Tweet';
 import { dummyTweets } from '../static/dummyData';
@@ -72,7 +72,7 @@ describe('App.js React Router 컴포넌트 적용', () => {
       expect(aboutInstance.props.path).toBe(aboutPath);
     });
 
-    test('Route path가 "/mypage" 인 Mypage 컴포넌트가 있어야 합니다.', () => {
+    test('Route path가 "/mypage" 인 MyPage 컴포넌트가 있어야 합니다.', () => {
       const { Switch } = ReactRouterDom;
       const myPagePath = '/mypage';
       const appInstance = TestRenderer.create(<App />).root;
@@ -105,7 +105,7 @@ describe('Sidebar.js 사이드바 구현', () => {
     expect(aboutIcon.tagName).toBe('I');
   });
 
-  test('Font Awesome을 이용한 Mypage 메뉴 아이콘이 있어야 합니다.(className : ".far .fa-user")', () => {
+  test('Font Awesome을 이용한 MyPage 메뉴 아이콘이 있어야 합니다.(className : ".far .fa-user")', () => {
     const { container } = render(<App />);
     const mypageIcon = container.querySelector('.far.fa-user');
 
@@ -141,7 +141,7 @@ describe('Sidebar.js 사이드바 구현', () => {
       expect(linkToAttr[1]).toHaveAttribute('href', '/about');
     });
 
-    test('Mypage 아이콘의 Link 컴포넌트는 "/mypage" 로 연결되야 합니다.', () => {
+    test('MyPage 아이콘의 Link 컴포넌트는 "/mypage" 로 연결되야 합니다.', () => {
       const { container } = render(<App />);
       const linkToAttr = container.querySelectorAll('a');
 
@@ -150,23 +150,23 @@ describe('Sidebar.js 사이드바 구현', () => {
   });
 });
 
-describe('Mypage.js Components', () => {
-  test('Mypage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
-    const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
+describe('MyPage.js Components', () => {
+  test('MyPage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
+    const mypageInstance = TestRenderer.create(<MyPage dummyTweets={[]} />)
       .root;
 
     expect(mypageInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
   });
 
-  test('Mypage 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
-    const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
+  test('MyPage 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
+    const mypageInstance = TestRenderer.create(<MyPage dummyTweets={[]} />)
       .root;
     expect(mypageInstance.findByType(Footer).type).toBe(Footer);
   });
 
-  describe('Mypage 데이터 렌더링 테스트', () => {
+  describe('MyPage 데이터 렌더링 테스트', () => {
     test('kimcoding이 작성한 트윗만 보여야 합니다.', () => {
-      const { queryByText } = render(<Mypage dummyTweets={[]} />);
+      const { queryByText } = render(<MyPage dummyTweets={[]} />);
       expect(queryByText('kimcoding')).toHaveTextContent(dummyTweets[0].username);
     });
   });
@@ -238,7 +238,7 @@ describe('React Router로 SPA 구현하기', () => {
     expect(location.pathname).toBe(aboutPath);
   });
 
-  test('Mypage 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
+  test('MyPage 메뉴를 누르면 URL path가 /mypage로 라우트 되어야 합니다.', async () => {
     const { Route } = ReactRouterDom;
 
     const myPagePath = '/mypage';
