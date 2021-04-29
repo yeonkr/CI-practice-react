@@ -12,6 +12,8 @@ import Footer from '../Footer';
 import Tweets from '../Pages/Tweets';
 import Mypage from '../Pages/Mypage';
 import About from '../Pages/About';
+import Tweet from '../Components/Tweet';
+import { dummyTweets } from '../static/dummyData';
 
 let ReactRouterDom;
 
@@ -52,38 +54,34 @@ describe('App.js React Router 컴포넌트 적용', () => {
       const rootPath = '/';
       const appInstance = TestRenderer.create(<App />).root;
 
-      expect(appInstance.findByType(Switch).props.children[0].props.path).toBe(
-        rootPath
-      );
-      expect(
-        appInstance.findByType(Switch).props.children[0].props.children.type
-      ).toBe(Tweets);
+      const switchInstance = appInstance.findByType(Switch);
+      const tweetsInstance = switchInstance.props.children.find(instance =>  instance.props.path && instance.props.path === rootPath);
+
+      expect(tweetsInstance).toBeTruthy();
+      expect(tweetsInstance.props.path).toBe(rootPath);
     });
 
     test('Route path가 "/about" 인 About 컴포넌트가 있어야 합니다.', () => {
-      const { Switch } = ReactRouterDom;
+      const { Switch, Route } = ReactRouterDom;
       const aboutPath = '/about';
       const appInstance = TestRenderer.create(<App />).root;
+      const switchInstance = appInstance.findByType(Switch);
+      const aboutInstance = switchInstance.props.children.find(instance =>  instance.props.path && instance.props.path === aboutPath);
 
-      expect(appInstance.findByType(Switch).props.children[1].props.path).toBe(
-        aboutPath
-      );
-      expect(
-        appInstance.findByType(Switch).props.children[1].props.children.type
-      ).toBe(About);
+      expect(aboutInstance).toBeTruthy();
+      expect(aboutInstance.props.path).toBe(aboutPath);
     });
 
     test('Route path가 "/mypage" 인 Mypage 컴포넌트가 있어야 합니다.', () => {
       const { Switch } = ReactRouterDom;
-      const mypagePath = '/mypage';
+      const myPagePath = '/mypage';
       const appInstance = TestRenderer.create(<App />).root;
 
-      expect(appInstance.findByType(Switch).props.children[2].props.path).toBe(
-        mypagePath
-      );
-      expect(
-        appInstance.findByType(Switch).props.children[2].props.children.type
-      ).toBe(Mypage);
+      const switchInstance = appInstance.findByType(Switch);
+      const myPageInstance = switchInstance.props.children.find(instance =>  instance.props.path && instance.props.path === myPagePath);
+
+      expect(myPageInstance).toBeTruthy();
+      expect(myPageInstance.props.path).toBe(myPagePath);
     });
   });
 });
@@ -148,6 +146,67 @@ describe('Sidebar.js 사이드바 구현', () => {
       const linkToAttr = container.querySelectorAll('a');
 
       expect(linkToAttr[2]).toHaveAttribute('href', '/mypage');
+    });
+  });
+});
+
+describe('Mypage.js Components', () => {
+  test('Mypage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
+    const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
+      .root;
+
+    expect(mypageInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
+  });
+
+  test('Mypage 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
+    const mypageInstance = TestRenderer.create(<Mypage dummyTweets={[]} />)
+      .root;
+    expect(mypageInstance.findByType(Footer).type).toBe(Footer);
+  });
+
+  describe('Mypage 데이터 렌더링 테스트', () => {
+    test('kimcoding이 작성한 트윗만 보여야 합니다.', () => {
+      const { queryByText } = render(<Mypage dummyTweets={[]} />);
+      expect(queryByText('kimcoding')).toHaveTextContent(dummyTweets[0].username);
+    });
+  });
+});
+
+describe('Tweets.js Components', () => {
+  test('Tweets 컴포넌트의 후손 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
+    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
+      .root;
+
+    expect(tweetsInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
+  });
+
+    test('Tweets 컴포넌트의 후손 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
+    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
+      .root;
+
+    expect(tweetsInstance.findByType(Footer).type).toBe(Footer);
+  });
+
+  describe('Tweets 데이터 렌더링 테스트', () => {
+    test('dummyTweets의 길이 만큼 트윗이 보여야 합니다.', () => {
+      const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
+        .root;
+
+      expect(tweetsInstance.findAllByType(Tweet)).toHaveLength(5);
+
+      const { queryByText } = render(
+        <Tweets dummyTweets={[]} />
+      );
+
+      expect(queryByText("kimcoding")).toHaveTextContent(dummyTweets[0].username);
+      expect(queryByText("parkhacker")).toHaveTextContent(
+        dummyTweets[1].username
+      );
+      expect(queryByText("leedesign")).toHaveTextContent(dummyTweets[2].username);
+      expect(queryByText("songfront")).toHaveTextContent(dummyTweets[3].username);
+      expect(queryByText("choiback")).toHaveTextContent(
+        dummyTweets[4].username
+      );
     });
   });
 });
