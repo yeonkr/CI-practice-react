@@ -12,7 +12,6 @@ import Footer from '../Footer';
 import Tweets from '../Pages/Tweets';
 import MyPage from '../Pages/MyPage';
 import About from '../Pages/About';
-import Tweet from '../Components/Tweet';
 import { dummyTweets } from '../static/dummyData';
 
 let ReactRouterDom;
@@ -151,13 +150,6 @@ describe('Sidebar.js 사이드바 구현', () => {
 });
 
 describe('MyPage.js Components', () => {
-  test('MyPage 컴포넌트의 자식 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
-    const mypageInstance = TestRenderer.create(<MyPage dummyTweets={[]} />)
-      .root;
-
-    expect(mypageInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
-  });
-
   test('MyPage 컴포넌트의 자식 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
     const mypageInstance = TestRenderer.create(<MyPage dummyTweets={[]} />)
       .root;
@@ -173,13 +165,6 @@ describe('MyPage.js Components', () => {
 });
 
 describe('Tweets.js Components', () => {
-  test('Tweets 컴포넌트의 후손 컴포넌트로 Tweet 컴포넌트가 있어야 합니다.', () => {
-    const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
-      .root;
-
-    expect(tweetsInstance.findAllByType(Tweet)[0].type).toBe(Tweet);
-  });
-
     test('Tweets 컴포넌트의 후손 컴포넌트로 Footer 컴포넌트가 있어야 합니다.', () => {
     const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
       .root;
@@ -189,11 +174,6 @@ describe('Tweets.js Components', () => {
 
   describe('Tweets 데이터 렌더링 테스트', () => {
     test('dummyTweets의 길이 만큼 트윗이 보여야 합니다.', () => {
-      const tweetsInstance = TestRenderer.create(<Tweets dummyTweets={[]} />)
-        .root;
-
-      expect(tweetsInstance.findAllByType(Tweet)).toHaveLength(5);
-
       const { queryByText } = render(
         <Tweets dummyTweets={[]} />
       );
