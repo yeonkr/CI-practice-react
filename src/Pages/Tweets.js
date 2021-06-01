@@ -3,13 +3,12 @@ import { dummyTweets } from '../static/dummyData';
 import './Tweets.css';
 // ! 위 코드는 수정하지 않습니다.
 
-// TODO - import문을 이용하여 Tweet, Footer 컴포넌트를 불러오세요.
-import Tweet from '../Components/Tweet';
+// TODO - import문을 이용하여 Footer 컴포넌트를 불러오세요.
 import Footer from '../Footer';
 
 const Tweets = () => {
   return (
-    <React.Fragment>
+    <div>
       <div className="tweetForm__container">
         <div className="tweetForm__wrapper">
           <div className="tweetForm__input">
@@ -25,14 +24,26 @@ const Tweets = () => {
       </div>
       <ul className="tweets">
         {/* TODO : 트윗 메세지가 있어야 합니다. */}
-        {dummyTweets.map((el) => (
-          <Tweet key={el.id} tweet={el} />
-        ))}
+        {dummyTweets.map((tweet) => {
+        return <li className="tweet" id={tweet.id}>
+          <div className="tweet__profile">
+            <img src={tweet.picture} />
+          </div>
+          <div className="tweet__content">
+            <div className="tweet__userInfo">
+              <span className="tweet__username">{tweet.username}</span>
+              <span className="tweet__createdAt">{tweet.createdAt}</span>
+            </div>
+            <div className="tweet__message">{tweet.content}</div>
+          </div>
+        </li>
+        })}
       </ul>
       {/* TODO - Footer 컴포넌트를 작성합니다. */}
       <Footer />
-    </React.Fragment>
+    </div>
   );
 };
+
 
 export default Tweets;
