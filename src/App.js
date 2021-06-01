@@ -10,7 +10,7 @@ import Tweets from './Pages/Tweets';
 
 const App = () => {
   return (
-    <React.Fragment>
+    <div>
       {/* TODO - BrowserRouter 컴포넌트를 작성합니다. */}
       <BrowserRouter>
         <div className="App">
@@ -33,7 +33,7 @@ const App = () => {
           </main>
         </div>
       </BrowserRouter>
-    </React.Fragment>
+    </div>
   );
 };
 
