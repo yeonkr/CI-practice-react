@@ -2,7 +2,7 @@ import React from 'react';
 import './About.css';
 import Footer from "../Footer"
 
-const About = (props) => {
+const About = () => {
   return (
     <section className="aboutTwittler">
       <div className="aboutTwittler__container">
