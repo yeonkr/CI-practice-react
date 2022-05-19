@@ -45,7 +45,10 @@ describe("App.js React Router 컴포넌트 적용", () => {
     */
 
     expect(appInstance.findByType(Routes).type).toBe(Routes);
-    expect(routesInstance.props.children[0].type).toBe(Route);
+
+    const routesChildren = routesInstance.props.children;
+    expect(routesChildren.find(route => route.type === Route)).toBeTruthy();
+    expect(routesChildren.filter(route => route.type === Route)).toHaveLength(3);
   });
 
   test("App 컴포넌트의 후손 컴포넌트로 Sidebar 컴포넌트가 있어야 합니다.", () => {
